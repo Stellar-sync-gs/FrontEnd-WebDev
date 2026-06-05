@@ -7,7 +7,7 @@
 
   --fundo-primario: #020b18;
   --fundo-secundario: #061526;
-  --fundo-cartao: #0a1f35;
+  --fundo-cartao: #0d1f31;
   --fundo-cartao-alt: #071828;
 
   --cor-neon: #00d4ff;
@@ -20,7 +20,7 @@
   --texto-secundario: #7ba8cc;
   --texto-suave: #3d6a8a;
 
-  --cor-borda: rgba(0, 212, 255, 0.15);
+  --cor-borda: rgba(38, 104, 117, 0.15);
   --cor-borda-brilho: rgba(0, 212, 255, 0.4);
 
   --gradiente-primario: linear-gradient(135deg, #00d4ff, #7b2fff);
