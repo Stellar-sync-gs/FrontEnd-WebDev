@@ -1,6 +1,5 @@
 /* ESTRELAS DO INÍCIO */
 (function gerarEstrelas() {
-
   const container = document.getElementById('estrelas');
   if (!container) return;
 
@@ -26,7 +25,7 @@
   container.appendChild(fragmento);
 })();
 
-/* SLIDES */
+/*  SLIDES */
 (function configurarSlideshow() {
   const slides = document.querySelectorAll('.slide:not(.controles-slide)');
   const pontos = document.querySelectorAll('.ponto');
@@ -63,7 +62,7 @@
   iniciarAuto();
 })();
 
-/* QUIZ */
+/*QUIZ*/
 (function configurarQuiz() {
   const perguntas = [
     {
@@ -278,9 +277,8 @@
   });
 })();
 
-//    SIMULADOR ORBITAL - Seção 07
+/*SIMULADOR ORBITAL — Seção 07 */
 (function configurarSimulador() {
-
 
   const MU = 398600;
   const R_TERRA = 6371;
@@ -305,7 +303,7 @@
   const badgeBLabel   = document.getElementById('sim-badge-b-label');
   const nomeB         = document.getElementById('sim-nome-b');
 
-  if (!canvas) return; 
+  if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
 
@@ -361,7 +359,7 @@
   }
 
   function calcularRisco(altA, altB, cenario) {
-    const diferencaAlt = Math.abs(altA - altB);  
+    const diferencaAlt = Math.abs(altA - altB);      
     const diferencaInc = Math.abs(cenario.incA - cenario.incB); 
 
     const distMin = Math.max(0.5, diferencaAlt * 1.2 + diferencaInc * 0.8);
@@ -371,19 +369,19 @@
     const score = Math.min(99, Math.round(100 / (1 + distMin / 12) * (1 + vRel * 2)));
 
     let nivel, classeFaixa, classeNivel, icone;
-    if (distMin > 20)      { nivel = 'BAIXO';    classeFaixa = 'faixa-verde';    classeNivel = 'nivel-verde';    icone = '✅'; }
-    else if (distMin > 5)  { nivel = 'MODERADO'; classeFaixa = 'faixa-amarelo'; classeNivel = 'nivel-amarelo'; icone = '⚠️'; }
-    else                   { nivel = 'CRÍTICO';  classeFaixa = 'faixa-vermelho'; classeNivel = 'nivel-vermelho'; icone = '🚨'; }
+    if (distMin > 20)      { nivel = 'BAIXO';    classeFaixa = 'faixa-verde';    classeNivel = 'nivel-verde';    icone = '<i class="bx bx-check-circle"></i>'; }
+    else if (distMin > 5)  { nivel = 'MODERADO'; classeFaixa = 'faixa-amarelo'; classeNivel = 'nivel-amarelo'; icone = '<i class="bx bx-alert-triangle"></i>'; }
+    else                   { nivel = 'CRÍTICO';  classeFaixa = 'faixa-vermelho'; classeNivel = 'nivel-vermelho'; icone = '<i class="bx bx-alarm-exclamation"></i>'; }
 
     const tempo = Math.max(0.5, Math.round((distMin * 0.4 + 2) * 10) / 10);
 
     const rA = R_TERRA + altA;
     const rB = R_TERRA + altB;
     const deltaAlt = altA < altB ? +12 : -12;
-    const dvManobra = dvHohmann(rA, rA + deltaAlt) * 1000;
-    const dvUnidades = Math.round(dvManobra * 0.18 * 10) / 10;
+    const dvManobra = dvHohmann(rA, rA + deltaAlt) * 1000; 
+    const dvUnidades = Math.round(dvManobra * 0.18 * 10) / 10; 
 
-    const dvSemCoord = Math.round(dvUnidades * 1.6 * 10) / 10;
+    const dvSemCoord = Math.round(dvUnidades * 1.6 * 10) / 10; 
     const distNova   = Math.round((distMin + 22 + Math.random() * 8) * 10) / 10;
 
     const quemDesvia = cenario.tipoB === 'detrito'
@@ -534,7 +532,7 @@
 
     const faixa = document.getElementById('sim-risco-faixa');
     faixa.className = 'sim-risco-faixa ' + r.classeFaixa;
-    document.getElementById('sim-risco-icone').textContent = r.icone;
+    document.getElementById('sim-risco-icone').innerHTML = r.icone;
     const elNivel = document.getElementById('sim-risco-nivel');
     elNivel.textContent = 'RISCO ' + r.nivel;
     elNivel.className = 'sim-risco-nivel ' + r.classeNivel;
