@@ -1,64 +1,565 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stellar Sync</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StellarSync</title>
+  <link rel="stylesheet" href="./src/css/reset.css" />
+  <link rel="stylesheet" href="./src/css/style.css" />
+  <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="menu">
-                <a href="">Início</a>
-                <a href="">Problema</a>
-                <a href="">Tecnologias</a>
-                <a href="">Objetivos</a>
-                <a href="">Público</a>
-                <a href="">Benefícios</a>
-                <a href="">Aplicação</a>
+<body data-tema="espaco-profundo">
+
+  <header class="cabecalho" id="topo">
+    <nav class="nav container">
+      <a href="#topo" class="logo">
+        <p class="logo-icone">⬡</p>
+        <p class="logo-texto">Stellar<p class="logo-destaque">Sync</p></p>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#problema">Problema</a></li>
+        <li><a href="#tecnologias">Tecnologias</a></li>
+        <li><a href="#objetivos">Objetivos</a></li>
+        <li><a href="#publico">Público</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#aplicacao">Aplicação</a></li>
+        <li><a href="#simulador">Simulador</a></li>
+        <li><a href="#quiz" class="nav-quiz">Quiz</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--INÍCIO-->
+  <section class="inicio">
+    <div class="estrelas" id="estrelas"></div>
+    <div class="conteudo-inicio container">
+      <p class="inicio-titulo-pequeno">Sistema de Monitoramento Orbital</p>
+      <h1 class="inicio-titulo">
+        Coordenando o<br />
+        <p class="texto-gradiente">Espaço</p> antes que<br />
+        o caos entre em órbita.
+      </h1>
+      <p class="inicio-subtitulo">
+        Plataforma inteligente de gestão de tráfego orbital.<br />
+        Detecta riscos, coordena manobras, protege satélites.
+      </p>
+
+      <div class="inicio-objetos">
+        <div class="total">
+          <p class="total-numero">45.700+</p>
+          <p class="total-rotulo">objetos rastreáveis</p>
+        </div>
+        <div class="divisor-stat"></div>
+        <div class="total">
+          <p class="total-numero">1.000+</p>
+          <p class="total-rotulo">alertas por dia</p>
+        </div>
+        <div class="divisor-stat"></div>
+        <div class="total">
+          <p class="total-numero">2,8 dias</p>
+          <p class="total-rotulo">janela de segurança</p>
+        </div>
+      </div>
+
+      <div class="inicio-opcoes">
+        <a href="#problema" class="botao botao-primario">Conheça o problema</a>
+        <a href="#quiz" class="botao botao-contorno">Testar conhecimento</a>
+      </div>
+    </div>
+
+    <div class="orbita-decorativa">
+      <div class="anel-orbita anel-orbita-1"><div class="satelite sat-1"></div></div>
+      <div class="anel-orbita anel-orbita-2"><div class="satelite sat-2"></div></div>
+      <div class="anel-orbita anel-orbita-3"><div class="satelite sat-3"></div></div>
+      <div class="terra"></div>
+    </div>
+  </section>
+
+  <!--  SEÇÃO 1 - PROBLEMA -->
+  <section class="secao" id="problema">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">01 - Problema</p>
+        <h2 class="titulo-secao">O Espaço Está <p class="neon">em Colapso</p></h2>
+        <p class="subtitulo-secao">O congestionamento orbital é uma ameaça real, crescente e urgente.</p>
+      </div>
+
+      <div class="lista-cartoes">
+        <div class="cartao cartao-perigo">
+          <div><i class="bx bx-ufo"></i></div>
+          <h3>130 milhões de fragmentos</h3>
+          <p>A ESA rastreia 45.700 objetos. Milhões menores são invisíveis, mas letais para satélites em operação.</p>
+        </div>
+        <div class="cartao cartao-aviso">
+          <div><i class="bx bx-alert-triangle"></i></div>
+          <h3>+1.000 avisos por dia</h3>
+          <p>Sem coordenação, cada operadora age sozinha como aviões em rota de colisão sem comunicação.</p>
+        </div>
+        <div class="cartao cartao-critico">
+          <div><i class="bx bx-explosion"></i></div>
+          <h3>Efeito Kessler</h3>
+          <p>Uma colisão gera detritos que causam mais colisões. Um ciclo irreversível que pode inutilizar órbitas inteiras.</p>
+        </div>
+        <div class="cartao cartao-info">
+          <div><i class="bx bx-hourglass"></i></div>
+          <h3>De 121 para 2,8 dias</h3>
+          <p>A janela de segurança sem controle orbital caiu drasticamente entre 2018 e 2025. O tempo está acabando.</p>
+        </div>
+      </div>
+
+      <div class="destaque-extra">
+        <p><i class="bx bx-hourglass"></i></p>
+        <p>Em dezembro de 2024, a Astroscale chegou a <strong>15 metros</strong> de um detrito pela primeira vez na história. Os satélites Starlink realizaram cerca de <strong>75.000 manobras</strong> entre 2023 e 2024 para evitar colisões.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2 - TECNOLOGIAS -->
+  <section class="secao secao-alt" id="tecnologias">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">02 - Tecnologias</p>
+        <h2 class="titulo-secao">As Tecnologias por <p class="neon">Trás do Sistema</p></h2>
+        <p class="subtitulo-secao">Uma stack completa para monitorar, simular e alertar em tempo real.</p>
+      </div>
+
+      <div class="lista-tecnologias">
+        <div class="cartao-tecnologia">
+          <div class="icone-tecnologia tech-python">Py</div>
+          <h3>Python</h3>
+          <p>Motor do sistema. Calcula trajetórias, detecta colisões e gera relatórios de risco com equações de física orbital.</p>
+        </div>
+        <div class="cartao-tecnologia">
+          <div class="icone-tecnologia tech-html">&lt;&gt;</div>
+          <h3>HTML &amp; CSS</h3>
+          <p>Interface visual estruturada, responsiva e com identidade futurista. Organização com Flexbox e variáveis CSS.</p>
+        </div>
+        <div class="cartao-tecnologia">
+          <div class="icone-tecnologia tech-js">JS</div>
+          <h3>JavaScript</h3>
+          <p>Quiz interativo, slideshow orbital, validação de formulário e sistema de temas dinâmicos em JS puro.</p>
+        </div>
+        <div class="cartao-tecnologia">
+          <div class="icone-tecnologia tech-arduino">Ard</div>
+          <h3>Arduino</h3>
+          <p>Painel físico de alertas com LEDs por nível de risco, display LCD e buzzer para notificações críticas.</p>
+        </div>
+        <div class="cartao-tecnologia">
+          <div class="icone-tecnologia tech-tinkercad">TkCad</div>
+          <h3>TinkerCad</h3>
+          <p>Simulação do circuito Arduino sem hardware físico. Ambiente de testes para o painel de monitoramento orbital.</p>
+        </div>
+        <div class="cartao-tecnologia">
+          <div class="icone-tecnologia tech-calculo">f(x)</div>
+          <h3>Cálculo</h3>
+          <p>Uso de cálculos matemáticos para avaliar desde gasto de combustível a melhor rota para evitar colisões.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3 - OBJETIVOS -->
+  <section class="secao" id="objetivos">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">03 - Objetivos</p>
+        <h2 class="titulo-secao">O Que o StellarSync <p class="neon">Quer Resolver</p></h2>
+        <p class="subtitulo-secao">Cinco metas concretas para tornar o espaço mais seguro e sustentável.</p>
+      </div>
+
+      <div class="lista-objetivos">
+        <div class="item-objetivo">
+          <div class="numero-objetivo">01</div>
+          <div class="conteudo-objetivo">
+            <h3>Reduzir Colisões Orbitais</h3>
+            <p>Detectar automaticamente aproximações perigosas antes que se tornem acidentes irreversíveis.</p>
+          </div>
+          <div class="icone-objetivo"><i class="bx bx-shield"></i></div>
+        </div>
+        <div class="item-objetivo">
+          <div class="numero-objetivo">02</div>
+          <div class="conteudo-objetivo">
+            <h3>Otimizar o Uso de Combustível</h3>
+            <p>Coordenar manobras para evitar desvios duplicados e desnecessários entre operadoras.</p>
+          </div>
+          <div class="icone-objetivo"><i class="bx bx-bolt"></i></div>
+        </div>
+        <div class="item-objetivo">
+          <div class="numero-objetivo">03</div>
+          <div class="conteudo-objetivo">
+            <h3>Proteger Satélites Ativos</h3>
+            <p>Aumentar a vida útil dos satélites em operação com alertas antecipados e coordenados.</p>
+          </div>
+          <div class="icone-objetivo"><i class="bx bx-satellite-dish-alt"></i></div>
+        </div>
+        <div class="item-objetivo">
+          <div class="numero-objetivo">04</div>
+          <div class="conteudo-objetivo">
+            <h3>Melhorar a Coordenação Espacial</h3>
+            <p>Criar um sistema centralizado que conecte e coordene múltiplas operadoras orbitais.</p>
+          </div>
+          <div class="icone-objetivo"><i class="bx bx-globe-alt-2"></i></div>
+        </div>
+        <div class="item-objetivo">
+          <div class="numero-objetivo">05</div>
+          <div class="conteudo-objetivo">
+            <h3>Prevenir o Efeito Kessler</h3>
+            <p>Cada colisão evitada interrompe a cascata de detritos antes que ela se torne irreversível.</p>
+          </div>
+          <div class="icone-objetivo"><i class="bx bx-link"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  SEÇÃO 4 - PÚBLICO-ALVO-->
+  <section class="secao secao-alt" id="publico">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">04 - Público-alvo</p>
+        <h2 class="titulo-secao">Quem Usa o <p class="neon">StellarSync</p></h2>
+        <p class="subtitulo-secao">Desenvolvido para quem opera, monitora e protege o espaço.</p>
+      </div>
+
+      <div class="lista-publico">
+        <div class="cartao-publico">
+          <div class="badge-publico">Agências Espaciais</div>
+          <div class="icone-publico"><i class="bx bx-bolt"></i></div>
+          <h3>NASA · ESA · AEB</h3>
+          <p>Planejam lançamentos e precisam de dados de congestionamento orbital atualizados e confiáveis.</p>
+        </div>
+        <div class="cartao-publico">
+          <div class="badge-publico">Operadoras de Satélites</div>
+          <div class="icone-publico"><i class="bx bx-satellite-dish-alt"></i></div>
+          <h3>SpaceX · OneWeb · Iridium</h3>
+          <p>Gerenciam frotas e precisam coordenar manobras sem conflito entre si e com outras operadoras.</p>
+        </div>
+        <div class="cartao-publico">
+          <div class="badge-publico">Centros de Monitoramento</div>
+          <div class="icone-publico"><i class="bx bx-bar-chart-big"></i></div>
+          <h3>LeoLabs · 18th SCS</h3>
+          <p>Monitoram objetos orbitais e emitem alertas de colisão diariamente para o mundo inteiro.</p>
+        </div>
+        <div class="cartao-publico">
+          <div class="badge-publico">Pesquisadores</div>
+          <div class="icone-publico"><i class="bx bx-microscope"></i></div>
+          <h3>Universidades · Institutos</h3>
+          <p>Analisam trajetórias, simulam cenários e estudam a sustentabilidade orbital a longo prazo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  SEÇÃO 5 - BENEFÍCIOS -->
+  <section class="secao" id="beneficios">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">05 - Benefícios</p>
+        <h2 class="titulo-secao">O Que Muda com o <p class="neon">StellarSync</p></h2>
+        <p class="subtitulo-secao">Impacto real para satélites, astronautas e para o planeta.</p>
+      </div>
+
+      <div class="slideshow" id="slideshow">
+
+        <div class="slide ativo">
+          <div class="conteudo-slide">
+            <div class="icone-slide"><i class="bx bx-satellite-dish-alt"></i></div>
+            <h3>Maior Vida Útil dos Satélites</h3>
+            <p>Menos manobras desnecessárias significa mais combustível reservado e mais anos de operação. Os satélites Starlink fazem em média 41 manobras por ano muitas evitáveis com coordenação.</p>
+          </div>
+          <img class="imagem-slide" src="./images/satelite.png" alt="Satélite em órbita terrestre" />
+        </div>
+
+        <div class="slide">
+          <div class="conteudo-slide">
+            <div class="icone-slide"><i class="bx bx-planet"></i></div>
+            <h3>Mais Tempo para Astronautas Reagirem</h3>
+            <p>Alertas antecipados dão tempo hábil para planejar manobras seguras na ISS evitando evacuações emergenciais dos tripulantes para as cápsulas de escape.</p>
+          </div>
+          <img class="imagem-slide" src="./images/estacao-espacial.png" alt="Estação Espacial Internacional" />
+        </div>
+
+        <div class="slide">
+          <div class="conteudo-slide">
+            <div class="icone-slide"><i class="bx bx-globe"></i></div>
+            <h3>Satélites Climáticos Protegidos</h3>
+            <p>70-80% das informações sobre clima e desastres vêm de satélites (ESA). Perder um satélite Copernicus em uma colisão evitável pode deixar regiões sem dados por anos.</p>
+          </div>
+          <img class="imagem-slide" src="./images/detritos.png" alt="Detritos espaciais em órbita" />
+        </div>
+
+        <div class="controles-slide">
+          <button class="botao-slide" id="botao-anterior" aria-label="Slide anterior">&#8592;</button>
+          <div class="pontos-slide">
+            <button class="ponto ativo" data-slide="0" aria-label="Slide 1"></button>
+            <button class="ponto" data-slide="1" aria-label="Slide 2"></button>
+            <button class="ponto" data-slide="2" aria-label="Slide 3"></button>
+          </div>
+          <button class="botao-slide" id="botao-proximo" aria-label="Próximo slide">&#8594;</button>
+        </div>
+      </div>
+
+      <div class="pilulas-beneficios">
+        <div class="pilula-beneficio"><i class="bx bx-bolt"></i> Lançamentos mais seguros</div>
+        <div class="pilula-beneficio"><i class="bx bx-link"></i> Cascata Kessler prevenida</div>
+        <div class="pilula-beneficio"><i class="bx bx-dollar-circle"></i> Economia de combustível</div>
+        <div class="pilula-beneficio"><i class="bx bx-satellite-dish-alt"></i> Conectividade global protegida</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6 - APLICAÇÃO NO DIA A DIA -->
+  <section class="secao secao-alt" id="aplicacao">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">06 - Aplicação no Dia a Dia</p>
+        <h2 class="titulo-secao">O Espaço Protege Sua <p class="neon">Vida Todo Dia</p></h2>
+        <p class="subtitulo-secao">Quando satélites falham, o impacto chega direto até você.</p>
+      </div>
+
+      <div class="lista-cotidiano">
+        <div class="cartao-cotidiano">
+          <div class="numero-cotidiano">01</div>
+          <div class="icone-cotidiano"><i class="bx bx-cloud-lightning"></i></div>
+          <h3>Monitoramento Climático</h3>
+          <p>Previsões de furacões, enchentes e secas dependem de satélites climáticos em órbita ativa.</p>
+        </div>
+        <div class="cartao-cotidiano">
+          <div class="numero-cotidiano">02</div>
+          <div class="icone-cotidiano"><i class="bx bx-bar-chart-big"></i></div>
+          <h3>Internet via Satélite</h3>
+          <p>Regiões remotas dependem de constelações como Starlink para ter conectividade com o mundo.</p>
+        </div>
+        <div class="cartao-cotidiano">
+          <div class="numero-cotidiano">03</div>
+          <div class="icone-cotidiano"><i class="bx bx-location-pin"></i></div>
+          <h3>GPS e Navegação</h3>
+          <p>Todo sistema de navegação (carros, aviões, navios) depende de satélites em funcionamento.</p>
+        </div>
+        <div class="cartao-cotidiano">
+          <div class="numero-cotidiano">04</div>
+          <div class="icone-cotidiano"><i class="bx bx-hot"></i></div>
+          <h3>Prevenção de Desastres</h3>
+          <p>Imagens satelitais monitoram queimadas, deslizamentos e tsunamis em tempo real para salvar vidas.</p>
+        </div>
+        <div class="cartao-cotidiano">
+          <div class="numero-cotidiano">05</div>
+          <div class="icone-cotidiano"><i class="bx bx-globe-alt-2"></i></div>
+          <h3>Comunicação Global</h3>
+          <p>Ligações internacionais, transmissões ao vivo e redes bancárias passam por satélites todos os dias.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 7 -SIMULADOR -->
+  <section class="secao" id="simulador">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">07 - Simulador</p>
+        <h2 class="titulo-secao">Veja o <span class="neon">StellarSync em Ação</span></h2>
+        <p class="subtitulo-secao">Escolha um cenário, ajuste a altitude dos objetos e veja o sistema detectar o risco e recomendar a manobra ideal.</p>
+      </div>
+
+      <div class="sim-wrapper">
+
+        <div class="sim-passo" id="sim-passo-cenario">
+          <p class="sim-passo-titulo"><span class="sim-passo-num">01</span> Escolha um cenário</p>
+          <div class="sim-cenarios">
+
+            <button class="sim-cenario-btn ativo" data-cenario="0">
+              <i class="bx bx-ufo sim-cenario-icone"></i>
+              <span class="sim-cenario-nome">Satélite x Detrito</span>
+              <span class="sim-cenario-desc">Caso mais comum - satélite manovrável se aproxima de lixo espacial.</span>
+            </button>
+
+            <button class="sim-cenario-btn" data-cenario="1">
+              <i class="bx bx-planet sim-cenario-icone"></i>
+              <span class="sim-cenario-nome">Satélite x Satélite</span>
+              <span class="sim-cenario-desc">Dois satélites ativos em rota de colisão - coordenação necessária.</span>
+            </button>
+
+            <button class="sim-cenario-btn" data-cenario="2">
+              <i class="bx bx-explosion sim-cenario-icone"></i>
+              <span class="sim-cenario-nome">Risco Crítico</span>
+              <span class="sim-cenario-desc">Aproximação extrema - janela de manobra mínima. Alta urgência.</span>
+            </button>
+
+          </div>
+        </div>
+
+        <div class="sim-passo">
+          <p class="sim-passo-titulo"><span class="sim-passo-num">02</span> Ajuste a altitude dos objetos</p>
+          <div class="sim-controles">
+
+            <div class="sim-controle-obj">
+              <div class="sim-obj-header">
+                <span class="sim-obj-badge sim-badge-a">SAT-A</span>
+                <span class="sim-obj-nome">Satélite A</span>
+              </div>
+              <div class="sim-slider-wrap">
+                <span class="sim-slider-label">Altitude</span>
+                <input class="sim-slider" type="range" id="sim-alt-a" min="300" max="800" value="550">
+                <span class="sim-slider-val"><span id="sim-val-alt-a">550</span> km</span>
+              </div>
             </div>
-        </nav>
-    </header>
 
-    <main>
-        <section class="inicio">
+            <div class="sim-vs">x</div>
 
-        </section>
+            <div class="sim-controle-obj">
+              <div class="sim-obj-header">
+                <span class="sim-obj-badge sim-badge-b" id="sim-badge-b-label">DET-B</span>
+                <span class="sim-obj-nome" id="sim-nome-b">Detrito B</span>
+              </div>
+              <div class="sim-slider-wrap">
+                <span class="sim-slider-label">Altitude</span>
+                <input class="sim-slider" type="range" id="sim-alt-b" min="300" max="800" value="555">
+                <span class="sim-slider-val"><span id="sim-val-alt-b">555</span> km</span>
+              </div>
+            </div>
 
+          </div>
 
-        <section class="problema">
+          <canvas class="sim-canvas" id="sim-canvas" aria-label="Visualização das órbitas dos dois objetos"></canvas>
 
-        </section>
+          <div style="text-align:center; margin-top:1.5rem;">
+            <button class="botao botao-primario" id="sim-btn-analisar">
+              <i class="bx bx-radar"></i> Analisar Risco
+            </button>
+          </div>
+        </div>
 
+        <div class="sim-resultado oculto" id="sim-resultado">
 
-        <section class="tecnologias">
+          <div class="sim-risco-faixa" id="sim-risco-faixa">
+            <div class="sim-risco-icone" id="sim-risco-icone"></div>
+            <div class="sim-risco-info">
+              <p class="sim-risco-nivel" id="sim-risco-nivel">-</p>
+              <p class="sim-risco-detalhe" id="sim-risco-detalhe">-</p>
+            </div>
+            <div class="sim-risco-dist">
+              <span class="sim-dist-num" id="sim-dist-num">-</span>
+              <span class="sim-dist-label">km de distância mínima</span>
+            </div>
+          </div>
+          <div class="sim-recomendacao" id="sim-recomendacao">
+            <p class="sim-rec-titulo">Manobra recomendada pelo StellarSync</p>
+            <div class="sim-rec-corpo" id="sim-rec-corpo"></div>
+          </div>
 
-        </section>
+          <div class="sim-comparacao">
+            <div class="sim-comp-item sim-comp-sem">
+              <p class="sim-comp-label">Sem coordenação</p>
+              <p class="sim-comp-dv" id="sim-dv-sem">-</p>
+              <p class="sim-comp-sub">ΔV gasto</p>
+              <p class="sim-comp-detalhe">Cada operadora decide sozinha, sem saber o que a outra fará.</p>
+            </div>
+            <div class="sim-comp-seta"><i class="bx bx-right-arrow-alt"></i></div>
+            <div class="sim-comp-item sim-comp-com">
+              <p class="sim-comp-label">Com StellarSync</p>
+              <p class="sim-comp-dv" id="sim-dv-com">-</p>
+              <p class="sim-comp-sub">ΔV gasto</p>
+              <p class="sim-comp-detalhe">Sistema coordena a decisão ótima e minimiza o consumo total.</p>
+            </div>
+          </div>
 
+          <div style="text-align:center; margin-top:1.5rem;">
+            <button class="botao botao-contorno" id="sim-btn-reiniciar">
+              <i class="bx bx-reset"></i> Simular outro cenário
+            </button>
+          </div>
 
-        <section class="objetivos">
+        </div>
 
-        </section>
+      </div>
+    </div>
+  </section>
 
+  <!-- QUIZ  -->
+  <section class="secao secao-quiz" id="quiz">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">08 - Quiz Espacial</p>
+        <h2 class="titulo-secao">Você Conhece o <p class="neon">Espaço?</p></h2>
+        <p class="subtitulo-secao">10 perguntas sobre lixo espacial, satélites e sustentabilidade orbital.</p>
+      </div>
 
-        <section class="publico">
+      <div class="invólucro-quiz" id="invólucro-quiz">
 
-        </section>
+        <div class="tela-quiz" id="tela-inicio-quiz">
+          <div class="icone-inicio-quiz"><i class="bx bx-bolt"></i></div>
+          <h3>Pronto para o desafio orbital?</h3>
+          <p>Teste seus conhecimentos em 10 perguntas e descubra se você é um conhecedor do Espaço.</p>
+          <button class="botao botao-primario" id="botao-iniciar-quiz">Iniciar Quiz</button>
+        </div>
 
+        <div class="tela-quiz oculto" id="tela-jogo-quiz">
+          <div class="cabecalho-quiz">
+            <div class="barra-progresso">
+              <div class="preenchimento-progresso" id="preenchimento-progresso"></div>
+            </div>
+            <div class="meta-quiz">
+              <p id="contador-pergunta">Pergunta 1 de 10</p>
+              <p id="placar-vivo">Pontos: 0</p>
+            </div>
+          </div>
+          <div class="pergunta-quiz" id="texto-pergunta"></div>
+          <div class="opcoes-quiz" id="container-opcoes"></div>
+          <div class="feedback-quiz oculto" id="feedback-resposta"></div>
+          <button class="botao botao-contorno oculto" id="botao-proxima-pergunta">Próxima</button>
+        </div>
 
-        <section class="beneficios">
+        <div class="tela-quiz oculto" id="tela-resultado-quiz">
+          <div class="badge-resultado" id="badge-resultado"></div>
+          <h3 id="titulo-resultado"></h3>
+          <p id="descricao-resultado"></p>
+          <div class="placar-resultado">
+            <p id="numero-placar-resultado"></p>
+            <p class="rotulo-placar-resultado">de 10 pontos</p>
+          </div>
+          <button class="botao botao-primario" id="botao-reiniciar-quiz">Jogar novamente</button>
+        </div>
 
-        </section>
+      </div>
+    </div>
+  </section>
 
+  <!-- RODAPÉ-->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-topo">
+        <div class="rodape-marca">
+          <p class="logo-texto">StellarSync</p>
+          <p>"Coordenando o espaço antes que o caos entre em órbita."</p>
+        </div>
+        <div class="links-rodape">
+          <a href="#problema">Problema</a>
+          <a href="#tecnologias">Tecnologias</a>
+          <a href="#objetivos">Objetivos</a>
+          <a href="#publico">Público</a>
+          <a href="#beneficios">Benefícios</a>
+          <a href="#aplicacao">Aplicação</a>
+          <a href="#simulador">Simulador</a>
+        </div>
+      </div>
 
-        <section class="aplicacao">
+      <div class="equipe-rodape">
+        <p class="titulo-equipe-rodape">Equipe</p>
+        <div class="lista-equipe">
+          <p>Estela - RM 569513</p>
+          <p>Gabriela - RM 569849</p>
+          <p>Beatriz - RM 568791</p>
+        </div>
+      </div>
 
-        </section>
-    </main>
+      <div class="rodape-final">
+        <p>© 2025 StellarSync - FIAP Global Solution</p>
+        <p>ODS 9 · ODS 10 · ODS 11 · ODS 13</p>
+      </div>
+    </div>
+  </footer>
 
-    <footer>
-        <p>Beatriz - RM568791, Estela - RM569513 & Gabriela - RM569849 &copy;
-        </p>
-    </footer>
+  <script src="./src/js/script.js"></script>
 </body>
 </html>
