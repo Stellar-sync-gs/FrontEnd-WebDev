@@ -1,4 +1,4 @@
-/* ESTRELAS DO INÍCIO */
+/* ESTRELAS DO INÍCIO  */
 (function gerarEstrelas() {
   const container = document.getElementById('estrelas');
   if (!container) return;
@@ -25,7 +25,7 @@
   container.appendChild(fragmento);
 })();
 
-/*  SLIDES */
+/* SLIDESHOW */
 (function configurarSlideshow() {
   const slides = document.querySelectorAll('.slide:not(.controles-slide)');
   const pontos = document.querySelectorAll('.ponto');
@@ -62,7 +62,7 @@
   iniciarAuto();
 })();
 
-/*QUIZ*/
+/*QUIZ  */
 (function configurarQuiz() {
   const perguntas = [
     {
@@ -277,7 +277,7 @@
   });
 })();
 
-/*SIMULADOR ORBITAL — Seção 07 */
+/* SIMULADOR ORBITAL — Seção 07 */
 (function configurarSimulador() {
 
   const MU = 398600;
@@ -332,7 +332,6 @@
       btn.classList.add('ativo');
       cenarioAtual = parseInt(btn.dataset.cenario);
       carregarCenario(cenarioAtual);
-
       divResultado.classList.add('oculto');
     });
   });
@@ -359,7 +358,7 @@
   }
 
   function calcularRisco(altA, altB, cenario) {
-    const diferencaAlt = Math.abs(altA - altB);      
+    const diferencaAlt = Math.abs(altA - altB);    
     const diferencaInc = Math.abs(cenario.incA - cenario.incB); 
 
     const distMin = Math.max(0.5, diferencaAlt * 1.2 + diferencaInc * 0.8);
@@ -377,18 +376,27 @@
 
     const rA = R_TERRA + altA;
     const rB = R_TERRA + altB;
-    const deltaAlt = altA < altB ? +12 : -12;
-    const dvManobra = dvHohmann(rA, rA + deltaAlt) * 1000; 
-    const dvUnidades = Math.round(dvManobra * 0.18 * 10) / 10; 
+
+    const separacaoNecessaria = Math.max(0, 20 - distMin);
+    const desvioBase = Math.ceil(separacaoNecessaria / 1.2) + 3; 
+    const desvioKm   = Math.min(Math.max(desvioBase, 4), 40);   
+
+    const direcao = (distMin < 3 || altA <= altB) ? +1 : -1;
+    const deltaAlt = direcao * desvioKm;
+
+    const dvManobra  = dvHohmann(rA, rA + deltaAlt) * 1000; 
+    const dvUnidades = Math.round(dvManobra * 0.18 * 10) / 10;
 
     const dvSemCoord = Math.round(dvUnidades * 1.6 * 10) / 10; 
-    const distNova   = Math.round((distMin + 22 + Math.random() * 8) * 10) / 10;
+    const distNova   = Math.round((distMin + desvioKm * 1.8 + Math.random() * 4) * 10) / 10;
 
     const quemDesvia = cenario.tipoB === 'detrito'
       ? 'Satélite A'
       : (dvUnidades < 5 ? 'Satélite A' : 'Ambos (coordenado)');
 
-    const acao = deltaAlt > 0 ? `elevar ${Math.abs(deltaAlt)} km` : `reduzir ${Math.abs(deltaAlt)} km`;
+    const acao = deltaAlt > 0
+      ? `elevar ${Math.abs(deltaAlt)} km`
+      : `reduzir ${Math.abs(deltaAlt)} km`;
 
     return { distMin, vRel, score, nivel, classeFaixa, classeNivel, icone, tempo, dvUnidades, dvSemCoord, distNova, quemDesvia, acao };
   }
@@ -419,7 +427,7 @@
 
     const raioMax  = Math.min(cx, cy) * 0.88;
     const rTerra   = 30;
-    const escala   = (raioMax - rTerra - 8) / 500; 
+    const escala   = (raioMax - rTerra - 8) / 500;
     const raioOrbA = rTerra + (altA - 300) * escala;
     const raioOrbB = rTerra + (altB - 300) * escala;
 
