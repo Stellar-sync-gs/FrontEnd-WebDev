@@ -366,50 +366,50 @@
     <div class="container">
       <div class="cabecalho-secao">
         <p class="tag-secao">07 - Simulador</p>
-        <h2 class="titulo-secao">Veja o <span class="neon">StellarSync em Ação</span></h2>
+        <h2 class="titulo-secao">Veja o <p class="neon">StellarSync em Ação</p></h2>
         <p class="subtitulo-secao">Escolha um cenário, ajuste a altitude dos objetos e veja o sistema detectar o risco e recomendar a manobra ideal.</p>
       </div>
 
       <div class="sim-wrapper">
 
         <div class="sim-passo" id="sim-passo-cenario">
-          <p class="sim-passo-titulo"><span class="sim-passo-num">01</span> Escolha um cenário</p>
+          <p class="sim-passo-titulo"><p class="sim-passo-num">01</p> Escolha um cenário</p>
           <div class="sim-cenarios">
 
             <button class="sim-cenario-btn ativo" data-cenario="0">
               <i class="bx bx-ufo sim-cenario-icone"></i>
-              <span class="sim-cenario-nome">Satélite x Detrito</span>
-              <span class="sim-cenario-desc">Caso mais comum - satélite manovrável se aproxima de lixo espacial.</span>
+              <p class="sim-cenario-nome">Satélite x Detrito</p>
+              <p class="sim-cenario-desc">Caso mais comum - satélite manovrável se aproxima de lixo espacial.</p>
             </button>
 
             <button class="sim-cenario-btn" data-cenario="1">
               <i class="bx bx-planet sim-cenario-icone"></i>
-              <span class="sim-cenario-nome">Satélite x Satélite</span>
-              <span class="sim-cenario-desc">Dois satélites ativos em rota de colisão - coordenação necessária.</span>
+              <p class="sim-cenario-nome">Satélite x Satélite</p>
+              <p class="sim-cenario-desc">Dois satélites ativos em rota de colisão - coordenação necessária.</p>
             </button>
 
             <button class="sim-cenario-btn" data-cenario="2">
               <i class="bx bx-explosion sim-cenario-icone"></i>
-              <span class="sim-cenario-nome">Risco Crítico</span>
-              <span class="sim-cenario-desc">Aproximação extrema - janela de manobra mínima. Alta urgência.</span>
+              <p class="sim-cenario-nome">Risco Crítico</p>
+              <p class="sim-cenario-desc">Aproximação extrema - janela de manobra mínima. Alta urgência.</p>
             </button>
 
           </div>
         </div>
 
         <div class="sim-passo">
-          <p class="sim-passo-titulo"><span class="sim-passo-num">02</span> Ajuste a altitude dos objetos</p>
+          <p class="sim-passo-titulo"><p class="sim-passo-num">02</p> Ajuste a altitude dos objetos</p>
           <div class="sim-controles">
 
             <div class="sim-controle-obj">
               <div class="sim-obj-header">
-                <span class="sim-obj-badge sim-badge-a">SAT-A</span>
-                <span class="sim-obj-nome">Satélite A</span>
+                <p class="sim-obj-badge sim-badge-a">SAT-A</p>
+                <p class="sim-obj-nome">Satélite A</p>
               </div>
               <div class="sim-slider-wrap">
-                <span class="sim-slider-label">Altitude</span>
+                <p class="sim-slider-label">Altitude</p>
                 <input class="sim-slider" type="range" id="sim-alt-a" min="300" max="800" value="550">
-                <span class="sim-slider-val"><span id="sim-val-alt-a">550</span> km</span>
+                <p class="sim-slider-val"><p id="sim-val-alt-a">550</p> km</p>
               </div>
             </div>
 
@@ -417,13 +417,13 @@
 
             <div class="sim-controle-obj">
               <div class="sim-obj-header">
-                <span class="sim-obj-badge sim-badge-b" id="sim-badge-b-label">DET-B</span>
-                <span class="sim-obj-nome" id="sim-nome-b">Detrito B</span>
+                <p class="sim-obj-badge sim-badge-b" id="sim-badge-b-label">DET-B</p>
+                <p class="sim-obj-nome" id="sim-nome-b">Detrito B</p>
               </div>
               <div class="sim-slider-wrap">
-                <span class="sim-slider-label">Altitude</span>
+                <p class="sim-slider-label">Altitude</p>
                 <input class="sim-slider" type="range" id="sim-alt-b" min="300" max="800" value="555">
-                <span class="sim-slider-val"><span id="sim-val-alt-b">555</span> km</span>
+                <p class="sim-slider-val"><p id="sim-val-alt-b">555</p> km</p>
               </div>
             </div>
 
@@ -447,8 +447,8 @@
               <p class="sim-risco-detalhe" id="sim-risco-detalhe">-</p>
             </div>
             <div class="sim-risco-dist">
-              <span class="sim-dist-num" id="sim-dist-num">-</span>
-              <span class="sim-dist-label">km de distância mínima</span>
+              <p class="sim-dist-num" id="sim-dist-num">-</p>
+              <p class="sim-dist-label">km de distância mínima</p>
             </div>
           </div>
           <div class="sim-recomendacao" id="sim-recomendacao">
@@ -547,31 +547,31 @@
         <div class="grupo-campo">
           <label for="campo-nome">Nome</label>
           <input type="text" id="campo-nome" placeholder="Seu nome completo" />
-          <span class="mensagem-erro" id="erro-nome"></span>
+          <p class="mensagem-erro" id="erro-nome"></p>
         </div>
 
         <div class="grupo-campo">
           <label for="campo-email">E-mail</label>
           <input type="email" id="campo-email" placeholder="seu@email.com" />
-          <span class="mensagem-erro" id="erro-email"></span>
+          <p class="mensagem-erro" id="erro-email"></p>
         </div>
 
         <div class="grupo-campo">
           <label for="campo-organizacao">Organização</label>
           <input type="text" id="campo-organizacao" placeholder="Empresa ou instituição" />
-          <span class="mensagem-erro" id="erro-organizacao"></span>
+          <p class="mensagem-erro" id="erro-organizacao"></p>
         </div>
 
         <div class="grupo-campo">
           <label for="campo-mensagem">Mensagem</label>
           <input type="text" id="campo-mensagem" placeholder="Como podemos ajudar?" />
-          <span class="mensagem-erro" id="erro-mensagem"></span>
+          <p class="mensagem-erro" id="erro-mensagem"></p>
         </div>
 
         <div class="grupo-campo">
           <label for="campo-sugestao">Sugestões ou Ideias</label>
           <input type="text" id="campo-sugestao" placeholder="Tem alguma ideia ou sugestão para o StellarSync?" />
-          <span class="mensagem-erro" id="erro-sugestao"></span>
+          <p class="mensagem-erro" id="erro-sugestao"></p>
       </div>
 
         <button type="submit" class="botao botao-primario">
