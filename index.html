@@ -26,6 +26,7 @@
         <li><a href="#beneficios">Benefícios</a></li>
         <li><a href="#aplicacao">Aplicação</a></li>
         <li><a href="#simulador">Simulador</a></li>
+        <li><a href="#contato">Contato</a></li>
         <li><a href="#quiz" class="nav-quiz">Quiz</a></li>
       </ul>
 
@@ -532,6 +533,53 @@
     </div>
   </section>
 
+  <!-- SEÇÃO 9 - CONTATO -->
+  <section class="secao" id="contato">
+    <div class="container">
+      <div class="cabecalho-secao">
+        <p class="tag-secao">09 - Contato</p>
+        <h2 class="titulo-secao">Entre em <p class="neon">Contato</p></h2>
+        <p class="subtitulo-secao">Tem interesse no StellarSync? Envie uma mensagem para a nossa equipe.</p>
+      </div>
+
+      <form class="formulario-contato" id="formulario-contato" novalidate>
+
+        <div class="grupo-campo">
+          <label for="campo-nome">Nome</label>
+          <input type="text" id="campo-nome" placeholder="Seu nome completo" />
+          <span class="mensagem-erro" id="erro-nome"></span>
+        </div>
+
+        <div class="grupo-campo">
+          <label for="campo-email">E-mail</label>
+          <input type="email" id="campo-email" placeholder="seu@email.com" />
+          <span class="mensagem-erro" id="erro-email"></span>
+        </div>
+
+        <div class="grupo-campo">
+          <label for="campo-organizacao">Organização</label>
+          <input type="text" id="campo-organizacao" placeholder="Empresa ou instituição" />
+          <span class="mensagem-erro" id="erro-organizacao"></span>
+        </div>
+
+        <div class="grupo-campo">
+          <label for="campo-mensagem">Mensagem</label>
+          <input type="text" id="campo-mensagem" placeholder="Como podemos ajudar?" />
+          <span class="mensagem-erro" id="erro-mensagem"></span>
+        </div>
+
+        <button type="submit" class="botao botao-primario">
+          <i class="bx bx-send"></i> Enviar Mensagem
+        </button>
+
+        <div class="mensagem-sucesso oculto" id="mensagem-sucesso">
+          ✓ Mensagem enviada com sucesso! Entraremos em contato em breve.
+        </div>
+
+      </form>
+    </div>
+  </section>
+
   <!-- RODAPÉ-->
   <footer class="rodape">
     <div class="container">
@@ -548,6 +596,7 @@
           <a href="#beneficios">Benefícios</a>
           <a href="#aplicacao">Aplicação</a>
           <a href="#simulador">Simulador</a>
+          <a href="#contato">Contato</a>
         </div>
       </div>
 

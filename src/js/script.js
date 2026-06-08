@@ -605,3 +605,59 @@
     });
   });
 })();
+
+/* FORMULÁRIO DE CONTATO */
+(function configurarFormulario() {
+  const form = document.getElementById('formulario-contato');
+  if (!form) return;
+
+  const campos = [
+    { id: 'campo-nome',         erro: 'erro-nome',         msg: 'Por favor, informe seu nome.' },
+    { id: 'campo-email',        erro: 'erro-email',        msg: 'Por favor, informe um e-mail válido.' },
+    { id: 'campo-organizacao',  erro: 'erro-organizacao',  msg: 'Por favor, informe sua organização.' },
+    { id: 'campo-mensagem',     erro: 'erro-mensagem',     msg: 'Por favor, escreva sua mensagem.' },
+  ];
+
+  function validarEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function limparErros() {
+    campos.forEach(c => {
+      document.getElementById(c.erro).textContent = '';
+      document.getElementById(c.id).classList.remove('erro');
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    limparErros();
+
+    let valido = true;
+
+    campos.forEach(c => {
+      const input = document.getElementById(c.id);
+      const valor = input.value.trim();
+
+      if (!valor) {
+        document.getElementById(c.erro).textContent = c.msg;
+        input.classList.add('erro');
+        valido = false;
+        return;
+      }
+
+      if (c.id === 'campo-email' && !validarEmail(valor)) {
+        document.getElementById(c.erro).textContent = c.msg;
+        input.classList.add('erro');
+        valido = false;
+      }
+    });
+
+    if (valido) {
+      form.reset();
+      const sucesso = document.getElementById('mensagem-sucesso');
+      sucesso.classList.remove('oculto');
+      setTimeout(() => sucesso.classList.add('oculto'), 4000);
+    }
+  });
+})();
