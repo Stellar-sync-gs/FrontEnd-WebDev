@@ -276,3 +276,319 @@
     carregarPergunta();
   });
 })();
+
+/* SIMULADOR ORBITAL — Seção 07 */
+(function configurarSimulador() {
+
+  const MU = 398600;
+  const R_TERRA = 6371;
+
+  const cenarios = [
+    { nome: 'Satélite × Detrito', tipoB: 'detrito', altA: 550, altB: 555, velA: 7.6,  velB: 7.65, incA: 53, incB: 51 },
+    { nome: 'Satélite × Satélite', tipoB: 'satelite', altA: 520, altB: 518, velA: 7.7,  velB: 7.72, incA: 45, incB: 47 },
+    { nome: 'Risco Crítico',       tipoB: 'detrito', altA: 400, altB: 401, velA: 7.9,  velB: 7.88, incA: 90, incB: 88 },
+  ];
+  let cenarioAtual = 0;
+  let estadoResultado = null;
+
+  const botoesCenario = document.querySelectorAll('.sim-cenario-btn');
+  const sliderA       = document.getElementById('sim-alt-a');
+  const sliderB       = document.getElementById('sim-alt-b');
+  const valA          = document.getElementById('sim-val-alt-a');
+  const valB          = document.getElementById('sim-val-alt-b');
+  const btnAnalisar   = document.getElementById('sim-btn-analisar');
+  const btnReiniciar  = document.getElementById('sim-btn-reiniciar');
+  const canvas        = document.getElementById('sim-canvas');
+  const divResultado  = document.getElementById('sim-resultado');
+  const badgeBLabel   = document.getElementById('sim-badge-b-label');
+  const nomeB         = document.getElementById('sim-nome-b');
+
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+
+  function carregarCenario(idx) {
+    const c = cenarios[idx];
+    sliderA.value = c.altA;
+    sliderB.value = c.altB;
+    valA.textContent = c.altA;
+    valB.textContent = c.altB;
+
+    if (c.tipoB === 'detrito') {
+      badgeBLabel.textContent = 'DET-B';
+      badgeBLabel.className = 'sim-obj-badge sim-badge-b';
+      nomeB.textContent = 'Detrito B';
+    } else {
+      badgeBLabel.textContent = 'SAT-B';
+      badgeBLabel.className = 'sim-obj-badge sim-badge-b-sat';
+      nomeB.textContent = 'Satélite B';
+    }
+    desenharCanvas(false);
+  }
+
+  botoesCenario.forEach(btn => {
+    btn.addEventListener('click', () => {
+      botoesCenario.forEach(b => b.classList.remove('ativo'));
+      btn.classList.add('ativo');
+      cenarioAtual = parseInt(btn.dataset.cenario);
+      carregarCenario(cenarioAtual);
+      divResultado.classList.add('oculto');
+    });
+  });
+
+  sliderA.addEventListener('input', () => {
+    valA.textContent = sliderA.value;
+    desenharCanvas(false);
+  });
+  sliderB.addEventListener('input', () => {
+    valB.textContent = sliderB.value;
+    desenharCanvas(false);
+  });
+
+  function velCircular(altKm) {
+    return Math.sqrt(MU / (R_TERRA + altKm));
+  }
+
+  function dvHohmann(r1, r2) {
+    const v1  = Math.sqrt(MU / r1);
+    const vt1 = Math.sqrt(2 * MU * r2 / (r1 * (r1 + r2)));
+    const vt2 = Math.sqrt(2 * MU * r1 / (r2 * (r1 + r2)));
+    const v2  = Math.sqrt(MU / r2);
+    return Math.abs(vt1 - v1) + Math.abs(v2 - vt2);
+  }
+
+  function calcularRisco(altA, altB, cenario) {
+    const diferencaAlt = Math.abs(altA - altB);    
+    const diferencaInc = Math.abs(cenario.incA - cenario.incB); 
+
+    const distMin = Math.max(0.5, diferencaAlt * 1.2 + diferencaInc * 0.8);
+
+    const vRel = Math.abs(velCircular(altA) - velCircular(altB)) + diferencaInc * 0.08;
+
+    const score = Math.min(99, Math.round(100 / (1 + distMin / 12) * (1 + vRel * 2)));
+
+    let nivel, classeFaixa, classeNivel, icone;
+    if (distMin > 20)      { nivel = 'BAIXO';    classeFaixa = 'faixa-verde';    classeNivel = 'nivel-verde';    icone = '<i class="bx bx-check-circle"></i>'; }
+    else if (distMin > 5)  { nivel = 'MODERADO'; classeFaixa = 'faixa-amarelo'; classeNivel = 'nivel-amarelo'; icone = '<i class="bx bx-alert-triangle"></i>'; }
+    else                   { nivel = 'CRÍTICO';  classeFaixa = 'faixa-vermelho'; classeNivel = 'nivel-vermelho'; icone = '<i class="bx bx-alarm-exclamation"></i>'; }
+
+    const tempo = Math.max(0.5, Math.round((distMin * 0.4 + 2) * 10) / 10);
+
+    const rA = R_TERRA + altA;
+    const rB = R_TERRA + altB;
+
+    const separacaoNecessaria = Math.max(0, 20 - distMin);
+    const desvioBase = Math.ceil(separacaoNecessaria / 1.2) + 3; 
+    const desvioKm   = Math.min(Math.max(desvioBase, 4), 40);   
+
+    const direcao = (distMin < 3 || altA <= altB) ? +1 : -1;
+    const deltaAlt = direcao * desvioKm;
+
+    const dvManobra  = dvHohmann(rA, rA + deltaAlt) * 1000; 
+    const dvUnidades = Math.round(dvManobra * 0.18 * 10) / 10;
+
+    const dvSemCoord = Math.round(dvUnidades * 1.6 * 10) / 10; 
+    const distNova   = Math.round((distMin + desvioKm * 1.8 + Math.random() * 4) * 10) / 10;
+
+    const quemDesvia = cenario.tipoB === 'detrito'
+      ? 'Satélite A'
+      : (dvUnidades < 5 ? 'Satélite A' : 'Ambos (coordenado)');
+
+    const acao = deltaAlt > 0
+      ? `elevar ${Math.abs(deltaAlt)} km`
+      : `reduzir ${Math.abs(deltaAlt)} km`;
+
+    return { distMin, vRel, score, nivel, classeFaixa, classeNivel, icone, tempo, dvUnidades, dvSemCoord, distNova, quemDesvia, acao };
+  }
+
+  function desenharCanvas(comResultado) {
+    const W = canvas.offsetWidth || 700;
+    canvas.width  = W;
+    canvas.height = 240;
+
+    const cx = W / 2, cy = 120;
+    const altA = parseInt(sliderA.value);
+    const altB = parseInt(sliderB.value);
+    const cenario = cenarios[cenarioAtual];
+
+    ctx.fillStyle = '#030c18';
+    ctx.fillRect(0, 0, W, 240);
+
+    for (let i = 0; i < 80; i++) {
+      const op = (Math.random() * 0.5 + 0.1).toFixed(2);
+      ctx.beginPath();
+      ctx.arc(Math.random() * W, Math.random() * 240, Math.random() * 1.2 + 0.2, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(255,255,255,${op})`;
+      ctx.fill();
+    }
+
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    const raioMax  = Math.min(cx, cy) * 0.88;
+    const rTerra   = 30;
+    const escala   = (raioMax - rTerra - 8) / 500;
+    const raioOrbA = rTerra + (altA - 300) * escala;
+    const raioOrbB = rTerra + (altB - 300) * escala;
+
+    const gradTerra = ctx.createRadialGradient(0, 0, rTerra * 0.3, 0, 0, rTerra);
+    gradTerra.addColorStop(0, '#1a6fbf');
+    gradTerra.addColorStop(0.65, '#0a3d6b');
+    gradTerra.addColorStop(1, '#051c32');
+    ctx.beginPath();
+    ctx.arc(0, 0, rTerra, 0, 2 * Math.PI);
+    ctx.fillStyle = gradTerra;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,212,255,0.25)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.arc(0, 0, raioOrbA, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'rgba(0,212,255,0.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(0, 0, raioOrbB, 0, 2 * Math.PI);
+    ctx.strokeStyle = cenario.tipoB === 'detrito' ? 'rgba(255,69,96,0.2)' : 'rgba(123,47,255,0.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const agora = Date.now() / 1000;
+    const nA = Math.sqrt(MU / Math.pow(R_TERRA + altA, 3)) * 0.00012;
+    const nB = Math.sqrt(MU / Math.pow(R_TERRA + altB, 3)) * 0.00012;
+    const angA = agora * nA * 900;
+    const angB = agora * nB * 850 + 1.1;
+
+    const incARad = cenario.incA * Math.PI / 180;
+    const incBRad = cenario.incB * Math.PI / 180;
+
+    const pAx = raioOrbA * Math.cos(angA);
+    const pAy = raioOrbA * Math.sin(angA) * Math.cos(incARad);
+    const pBx = raioOrbB * Math.cos(angB);
+    const pBy = raioOrbB * Math.sin(angB) * Math.cos(incBRad);
+
+    if (comResultado && estadoResultado) {
+      const distKm = estadoResultado.distMin;
+      const corLinha = distKm <= 5 ? 'rgba(255,69,96,0.7)' : distKm <= 20 ? 'rgba(255,184,0,0.55)' : 'rgba(0,255,159,0.3)';
+      ctx.setLineDash([3, 5]);
+      ctx.beginPath();
+      ctx.moveTo(pAx, pAy);
+      ctx.lineTo(pBx, pBy);
+      ctx.strokeStyle = corLinha;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      const mx = (pAx + pBx) / 2;
+      const my = (pAy + pBy) / 2;
+      ctx.font = 'bold 10px Orbitron, monospace';
+      ctx.fillStyle = corLinha.replace('0.7','1').replace('0.55','1').replace('0.3','0.9');
+      ctx.textAlign = 'center';
+      ctx.fillText(distKm.toFixed(1) + ' km', mx, my - 6);
+    }
+
+    ctx.beginPath();
+    ctx.arc(pAx, pAy, 5, 0, 2 * Math.PI);
+    ctx.fillStyle = '#00d4ff';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(pAx, pAy, 9, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'rgba(0,212,255,0.35)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    const corB = cenario.tipoB === 'detrito' ? '#ff4560' : '#a57fff';
+    const corBHalo = cenario.tipoB === 'detrito' ? 'rgba(255,69,96,0.35)' : 'rgba(165,127,255,0.35)';
+    ctx.beginPath();
+    ctx.arc(pBx, pBy, cenario.tipoB === 'detrito' ? 4 : 5, 0, 2 * Math.PI);
+    ctx.fillStyle = corB;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(pBx, pBy, 8, 0, 2 * Math.PI);
+    ctx.strokeStyle = corBHalo;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.font = '9px Orbitron, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#00d4ff';
+    ctx.fillText('SAT-A', pAx, pAy - 13);
+    ctx.fillStyle = corB;
+    ctx.fillText(cenario.tipoB === 'detrito' ? 'DET-B' : 'SAT-B', pBx, pBy - 13);
+
+    ctx.restore();
+
+    ctx.font = '10px Orbitron, monospace';
+    ctx.fillStyle = 'rgba(0,212,255,0.6)';
+    ctx.textAlign = 'left';
+    ctx.fillText('A: ' + altA + ' km', 10, 20);
+    ctx.fillStyle = cenario.tipoB === 'detrito' ? 'rgba(255,69,96,0.7)' : 'rgba(165,127,255,0.7)';
+    ctx.fillText('B: ' + altB + ' km', 10, 34);
+  }
+
+  btnAnalisar.addEventListener('click', () => {
+    const altA = parseInt(sliderA.value);
+    const altB = parseInt(sliderB.value);
+    const cenario = cenarios[cenarioAtual];
+
+    estadoResultado = calcularRisco(altA, altB, cenario);
+    const r = estadoResultado;
+
+    const faixa = document.getElementById('sim-risco-faixa');
+    faixa.className = 'sim-risco-faixa ' + r.classeFaixa;
+    document.getElementById('sim-risco-icone').innerHTML = r.icone;
+    const elNivel = document.getElementById('sim-risco-nivel');
+    elNivel.textContent = 'RISCO ' + r.nivel;
+    elNivel.className = 'sim-risco-nivel ' + r.classeNivel;
+    document.getElementById('sim-risco-detalhe').textContent =
+      `Distância mínima em ~${r.tempo.toFixed(1)}h — velocidade relativa ${r.vRel.toFixed(2)} km/s`;
+    document.getElementById('sim-dist-num').textContent = r.distMin.toFixed(1);
+
+    document.getElementById('sim-rec-corpo').innerHTML = `
+      <div class="sim-rec-item">
+        <p class="sim-rec-label">Quem manobra</p>
+        <p class="sim-rec-valor cor-neon">${r.quemDesvia}</p>
+      </div>
+      <div class="sim-rec-item">
+        <p class="sim-rec-label">Ação</p>
+        <p class="sim-rec-valor">${r.acao}</p>
+      </div>
+      <div class="sim-rec-item">
+        <p class="sim-rec-label">Combustível (ΔV)</p>
+        <p class="sim-rec-valor cor-verde">${r.dvUnidades.toFixed(1)} u</p>
+      </div>
+      <div class="sim-rec-item">
+        <p class="sim-rec-label">Nova distância mínima</p>
+        <p class="sim-rec-valor cor-verde">${r.distNova.toFixed(1)} km</p>
+      </div>
+    `;
+
+    document.getElementById('sim-dv-sem').textContent = r.dvSemCoord.toFixed(1) + ' ΔV';
+    document.getElementById('sim-dv-com').textContent  = r.dvUnidades.toFixed(1) + ' ΔV';
+
+    divResultado.classList.remove('oculto');
+    desenharCanvas(true);
+
+    divResultado.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  btnReiniciar.addEventListener('click', () => {
+    estadoResultado = null;
+    divResultado.classList.add('oculto');
+    desenharCanvas(false);
+    document.getElementById('sim-passo-cenario').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  function loop() {
+    desenharCanvas(!!estadoResultado);
+    requestAnimationFrame(loop);
+  }
+
+  carregarCenario(0);
+  loop();
+
+})();
