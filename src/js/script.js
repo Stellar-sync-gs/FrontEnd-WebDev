@@ -592,3 +592,16 @@
   loop();
 
 })();
+
+/* TROCA DE TEMA */
+(function configurarTemas() {
+  const botoes = document.querySelectorAll('.botao-tema');
+
+  botoes.forEach(botao => {
+    botao.addEventListener('click', () => {
+      document.body.setAttribute('data-tema', botao.dataset.tema);
+      botoes.forEach(b => b.classList.remove('ativo'));
+      botao.classList.add('ativo');
+    });
+  });
+})();
