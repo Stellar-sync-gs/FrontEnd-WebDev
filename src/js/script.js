@@ -611,12 +611,13 @@
   const form = document.getElementById('formulario-contato');
   if (!form) return;
 
-  const campos = [
-    { id: 'campo-nome',         erro: 'erro-nome',         msg: 'Por favor, informe seu nome.' },
-    { id: 'campo-email',        erro: 'erro-email',        msg: 'Por favor, informe um e-mail válido.' },
-    { id: 'campo-organizacao',  erro: 'erro-organizacao',  msg: 'Por favor, informe sua organização.' },
-    { id: 'campo-mensagem',     erro: 'erro-mensagem',     msg: 'Por favor, escreva sua mensagem.' },
-  ];
+const campos = [
+  { id: 'campo-nome',        erro: 'erro-nome',        msg: 'Por favor, informe seu nome.',         obrigatorio: true  },
+  { id: 'campo-email',       erro: 'erro-email',        msg: 'Por favor, informe um e-mail válido.', obrigatorio: true  },
+  { id: 'campo-organizacao', erro: 'erro-organizacao',  msg: 'Por favor, informe sua organização.',  obrigatorio: true  },
+  { id: 'campo-mensagem',    erro: 'erro-mensagem',     msg: 'Por favor, escreva sua mensagem.',     obrigatorio: true  },
+  { id: 'campo-sugestao',    erro: 'erro-sugestao',     msg: '',                                     obrigatorio: false },
+];
 
   function validarEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -629,7 +630,7 @@
     });
   }
 
-  form.addEventListener('submit', function (e) {
+ form.addEventListener('submit', function (e) {
     e.preventDefault();
     limparErros();
 
@@ -639,7 +640,7 @@
       const input = document.getElementById(c.id);
       const valor = input.value.trim();
 
-      if (!valor) {
+      if (c.obrigatorio && !valor) {
         document.getElementById(c.erro).textContent = c.msg;
         input.classList.add('erro');
         valido = false;
